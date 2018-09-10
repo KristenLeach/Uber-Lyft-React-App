@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import ConfirmRoute from '../components/results/ConfirmRoute'
+import ConfirmRoute from '../components/confirmRoute/ConfirmRoute'
 import CardLabel from '../components/CardLabel'
 
 class ConfirmRouteContainer extends Component{
