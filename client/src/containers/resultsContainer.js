@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Results from '../components/results/Results'
 import CardLabel from '../components/CardLabel';
+import Card from '../components/Card'
 
 class ResultsContainer extends Component{
 
@@ -8,10 +9,10 @@ class ResultsContainer extends Component{
         let cardLabel = "Enjoy your ride!"
 
         return(
-            <div>
+            <Card>
                 <CardLabel cardLabel={cardLabel} />
                 <Results /> 
-            </div>
+            </Card>
         )
     }
 }

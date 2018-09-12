@@ -10,36 +10,50 @@ class Search extends Component{
         destination: ''
     }
 
-     handleFormSubmit = () => {
-         console.log(this.state)
-    //     e.preventDefault()
-    //     this.props.actions.fetchStartingLocation(this.state.startingLocation)
+     handleFormSubmit = (e) => {
+        e.preventDefault()
+        
+        //this.props.actions.fetchDestination(this.state.destination)
      }
 
-    handleChangeStart = ({value: startingLocation}) => {
+    handleChangeStart = (e) => {
         this.setState({
-            startingLocation
+            startingLocation: e.target.value,
         })
     }
 
-    handleChangeDestination = ({value: destination}) => {
+    handleChangeDestination = (e, {value: destination}) => {
         this.setState({
             destination
         })
     }
 
-    handleStartSearch = () => {
-        console.log(this.state.startingLocation)
+    handleStartSearch = (e) => {
+        e.preventDefault()
+        e.stopPropagation()
+        this.props.actions.fetchStartingLocation(this.state.startingLocation)
     }
 
-    handleDestinationSearch = () => {
+    handleDestinationSearch = (e) => {
+        e.preventDefault()
+        e.stopPropagation()
         console.log(this.state.destination)
+    }
+
+    handleUpdateAddress = (e) => {
+        this.setState({
+            startingLocation: e.currentTarget.innerText,
+        })
     }
 
     render(){
         return(
             <Card >
-                <SearchInput label="Starting Location..." onChange={this.handleChangeStart} onClick={this.handleStartSearch}/>
+                <SearchInput label="Starting Location..." 
+                    suggestedLocations={this.props.suggestedStartingLocations}
+                    onChange={this.handleChangeStart} 
+                    onSubmit={this.handleStartSearch}
+                    handleUpdateAddress={this.handleUpdateAddress}/>
                 <br/> 
                 <br/>
                 <SearchInput label="Destination..." onChange={this.handleChangeDestination} onClick={this.handleDestinationSearch}/> 
