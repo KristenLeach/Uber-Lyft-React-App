@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import ConfirmRoute from '../components/confirmRoute/ConfirmRoute'
 import CardLabel from '../components/CardLabel'
+import Card from '../components/Card'
 
 class ConfirmRouteContainer extends Component{
 
@@ -8,10 +9,10 @@ class ConfirmRouteContainer extends Component{
         let cardLabel = "Does this look right?"
 
         return(
-            <div>
+            <Card>
                 <CardLabel cardLabel={cardLabel} />
                 <ConfirmRoute /> 
-            </div>
+            </Card>
         )
     }
 }

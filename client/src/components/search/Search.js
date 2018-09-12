@@ -10,10 +10,11 @@ class Search extends Component{
         destination: ''
     }
 
-    handleOnSubmit = (e) => {
-        e.preventDefault()
-        console.log(this.state)
-    }
+     handleFormSubmit = () => {
+         console.log(this.state)
+    //     e.preventDefault()
+    //     this.props.actions.fetchStartingLocation(this.state.startingLocation)
+     }
 
     handleChangeStart = ({value: startingLocation}) => {
         this.setState({
@@ -27,18 +28,24 @@ class Search extends Component{
         })
     }
 
+    handleStartSearch = () => {
+        console.log(this.state.startingLocation)
+    }
+
+    handleDestinationSearch = () => {
+        console.log(this.state.destination)
+    }
+
     render(){
         return(
             <Card >
-            <form onSubmit={this.handleOnSubmit}>
-                <SearchInput label="Starting Location..." onChange={this.handleChangeStart}/>
+                <SearchInput label="Starting Location..." onChange={this.handleChangeStart} onClick={this.handleStartSearch}/>
                 <br/> 
                 <br/>
-                <SearchInput label="Destination..." onChange={this.handleChangeDestination}/> 
+                <SearchInput label="Destination..." onChange={this.handleChangeDestination} onClick={this.handleDestinationSearch}/> 
                 <br/>
                 <br/> 
-                <Button buttonTitle="Submit"/>
-            </form>
+                <Button buttonTitle="Submit" onClick={this.handleFormSubmit}/>
             </ Card >
         )
     }

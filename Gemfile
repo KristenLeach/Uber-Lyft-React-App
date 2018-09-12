@@ -29,6 +29,8 @@ gem 'bootsnap', '>= 1.1.0', require: false
 gem 'foreman', '~> 0.82.0'
 gem 'thor', '~> 0.19.1'
 
+gem 'dotenv-rails', groups: [:development, :test]
+gem 'rest-client'
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
 # gem 'rack-cors'
 

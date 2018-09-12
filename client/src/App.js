@@ -4,8 +4,14 @@ import  { BrowserRouter as Router, Route } from 'react-router-dom'
 import ConfirmRouteContainer from './containers/ConfirmRouteContainer'
 import ResultsContainer from './containers/ResultsContainer'
 import SearchContainer from './containers/SearchContainer'
-
+import Background from './images/Background.jpg'
 import './App.css';
+
+// var sectionStyle = {
+//   width: "100%",
+//   height: "400px",
+//   backgroundImage: `url(${Background})`
+// };
 
 class App extends Component {
   render() {
