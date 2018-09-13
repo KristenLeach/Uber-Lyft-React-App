@@ -11,6 +11,10 @@ export default function rootReducer(state = {
         return {...state, isFetchingStartingLocation: true, suggestedStartingLocations: []}
       case "DISPLAY_START_LOCATIONS":
         return {...state, isFetchingStartingLocation: false, suggestedStartingLocations: action.suggestedStartingLocations}
+        case "FETCHING_SUGGESTED_DESTINATIONS":
+        return {...state, isFetchingDestination: true, suggestedDestinations: []}
+      case "DISPLAY_DESTINATIONS":
+        return {...state, isFetchingDestination: false, suggestedDestinations: action.suggestedDestinations}
         default:
             return state
     }

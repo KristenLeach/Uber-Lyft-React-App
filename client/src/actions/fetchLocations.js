@@ -16,7 +16,7 @@ export function fetchStartingLocation(input) {
   export function fetchDestination(input) {
     console.log(input)
       return (dispatch) => {
-        dispatch({ type: 'FETCHING_SUGGESTED_DESTINATION' });
+        dispatch({ type: 'FETCHING_SUGGESTED_DESTINATIONS' });
         _fetchLocation(input).then(suggestedDestinations => dispatch({ type: 'DISPLAY_DESTINATIONS', suggestedDestinations }));
       };
     }

@@ -26,18 +26,30 @@ class SearchInput extends Component{
     }
 
     handleDropdownChange = (e) => {
-        debugger
         this.setState({
             isDropdownOpen: false
         })
         this.props.handleUpdateAddress(e)
     }
 
+    onFocus = () => this.setState({ isDropdownOpen: true },
+        () => this.setState({ isDropdownOpen: false }));
+
     
     render(){
         return(
             <form onSubmit={this.props.onSubmit}>
-                 <Dropdown onSearchChange={this.props.onChange} onChange={this.handleDropdownChange} placeholder={this.props.label} fluid search selection options={this.state.suggestedLocations} open={this.state.isDropdownOpen} />
+                 <Dropdown 
+                  onSearchChange={this.props.onChange}
+                  onChange={this.handleDropdownChange} 
+                  placeholder={this.props.label} 
+                   search selection 
+                  onFocus={this.onFocus} 
+                  options={this.state.suggestedLocations} 
+                  open={this.state.isDropdownOpen || false} 
+                  icon={<span></span>}
+                //   searchQuery={this.props.value}
+                />
                  <input type="submit"/>
             </form>
         )
