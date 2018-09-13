@@ -1,5 +1,7 @@
 import React, {Component} from 'react'
 import { Dropdown } from 'semantic-ui-react'
+import { Button, Icon } from 'semantic-ui-react'
+
 
 class SearchInput extends Component{
 
@@ -50,7 +52,9 @@ class SearchInput extends Component{
                   icon={<span></span>}
                 //   searchQuery={this.props.value}
                 />
-                 <input type="submit"/>
+                 <Button icon>
+                    <Icon name='search'/> 
+                </Button>
             </form>
         )
     }
