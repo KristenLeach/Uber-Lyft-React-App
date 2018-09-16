@@ -8,7 +8,7 @@ import { createStore, applyMiddleware, compose } from 'redux'
 import rootReducer from './reducers/rootReducer'
 import thunk from 'redux-thunk'
 import logger from 'redux-logger'
-import 'semantic-ui-css/semantic.min.css';
+import 'semantic-ui-css/semantic.min.css'
 
 const middlewares = [thunk]
 

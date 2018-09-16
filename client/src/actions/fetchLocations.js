@@ -1,26 +1,13 @@
 function _fetchLocation(input) {
-  return fetch(`/search_start/${input}`)
+  return fetch(`RailsApi/search_locations/${input}`)
   .then(response => response.json())
   .then(locations => locations.predictions)
 }
 
 function _getLatLong(location) {
-  return new Promise((resolve, reject) => {
-    geocoder.geocode(location,  (err, data) => {
-      try {
-        if (err || !data.results || !data.results.length || !data.results[0].geometry) {
-          console.log(data);
-          if (data && data.status === 'OVER_QUERY_LIMIT') {
-            reject('OVER_QUERY_LIMIT');
-          }
-          return resolve(false);
-        } 
-        return resolve(data.results[0].geometry.location);
-      } catch(e) {
-        return resolve(false);
-      }
-    });
-  })
+  return fetch(`RailsApi/confirm_route/convert_lat_long/${location}`)
+  .then(response => response.json())
+  .then(addressInfo => addressInfo.results[0].geometry.location)
 }
 
 export function fetchStartingLocation(input) {
@@ -43,7 +30,7 @@ export function fetchStartingLocation(input) {
     console.log(location)
     return (dispatch) => {
       dispatch({type: 'CONVERTING_START_LAT_LONG'})
-      _getLatLong(location).then(startLatLong => dispatch({type: 'RETRIEVE_START_LAT_LONG', startLatLong}))
+      return _getLatLong(location).then(({ lat, lng }) => dispatch({type: 'RETRIEVE_START_LAT_LONG', startLat: lat, startLong: lng}))
     }
   }
 
@@ -51,6 +38,23 @@ export function fetchStartingLocation(input) {
     console.log(location)
     return (dispatch) => {
       dispatch({type: 'CONVERTING_DESTINATION_LAT_LONG'})
-      _getLatLong(location).then(destinationLatLong => dispatch({type: 'RETRIEVE_DESTINATION_LAT_LONG', destinationLatLong}))
+      return _getLatLong(location).then(({ lat, lng })=> dispatch({type: 'RETRIEVE_DESTINATION_LAT_LONG', destinationLat: lat, destinationLong: lng }))
     }
+  }
+
+  export function convertLatLong(startLocation, destinationLocation){
+    return async (dispatch) => {
+      await dispatch(convertStartLatLong(startLocation))
+      await dispatch(convertDestinationLatLong(destinationLocation))
+      debugger
+    }
+  }
+
+  export function getMapboxKey(){
+    return (dispatch) => {
+      dispatch({ type: 'FETCHING_MAPBOX_KEY' });
+      fetch("/RailsApi/confirm_route/mapbox")
+      .then(response => response.text())
+      .then(key => dispatch({ type: 'ADD_MAPBOX_KEY_TO_STATE', key }));
+    };
   }

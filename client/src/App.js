@@ -5,6 +5,7 @@ import ConfirmRouteContainer from './containers/ConfirmRouteContainer'
 import ResultsContainer from './containers/ResultsContainer'
 import SearchContainer from './containers/SearchContainer'
 import Background from './images/Background.jpg'
+import { getMapboxKey } from './actions/fetchLocations'
 import './App.css';
 
 // var sectionStyle = {
@@ -14,6 +15,11 @@ import './App.css';
 // };
 
 class App extends Component {
+
+  componentDidMount(){
+    this.props.getMapboxKey()
+  }
+
   render() {
     return (
       <div className="App">
@@ -32,4 +38,8 @@ class App extends Component {
 const mapStateToProps = (state) => {
   return {startingLocation: state.StartingLocation, destination: state.destination}
 }
-export default connect(mapStateToProps)(App);
+const mapDispatchToProps = (dispatch) => {
+  return {getMapboxKey: () => dispatch(getMapboxKey())}
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
