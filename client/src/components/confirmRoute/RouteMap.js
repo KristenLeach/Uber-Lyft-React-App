@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import ReactMapboxGl, { Marker } from "react-mapbox-gl";
-import {Icon} from 'semantic-ui-react'
+import ReactMapboxGl, { Layer, Marker } from "react-mapbox-gl";
+import { Icon } from 'semantic-ui-react'
 
 class RouteMap extends Component{
     state = {
@@ -29,21 +29,24 @@ class RouteMap extends Component{
 
     render() {
         const {Map} = this.state
-        
         return Map? (
-          <Map
+        <Map
           style="mapbox://styles/mapbox/streets-v9"
-          center={[this.props.startLong, this.props.startLat]}
+          center={this.props.startLngLat}
           containerStyle={{
+            position: 'relative',
             height: "300px",
-            width: "300px"
+            width: "400px",
           }}>
-            <Marker coordinates={[this.props.startLong, this.props.startLat]}>
-                <Icon name="circle" />
-            </Marker>
-            <Marker coordinates={[this.props.destinationLong, this.props.destinationLat]}>
-                <Icon name="circle" />
-            </Marker>
+        <Layer
+          type="symbol"
+          id="marker"
+          layout={{
+              'icon-image': 'star-15',
+              'icon-allow-overlap': true }}>
+        <Marker coordinates={this.props.startLngLat}/>
+        <Marker coordinates={this.props.destinationLngLat}/>
+        </Layer>
         </Map>
         ): null
       }
