@@ -1,4 +1,4 @@
-class SearchController < ApplicationController
+class PlacesSearchController < ApplicationController
 
     def search_locations
         input = params[:input]

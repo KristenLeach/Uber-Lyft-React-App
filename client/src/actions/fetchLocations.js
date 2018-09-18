@@ -1,4 +1,4 @@
-function _fetchLocation(input) {
+function _fetchDropdownLocations(input) {
   return fetch(`RailsApi/search_locations/${input}`)
   .then(response => response.json())
   .then(locations => locations.predictions)
@@ -7,14 +7,30 @@ function _fetchLocation(input) {
 function _getLatLong(location) {
   return fetch(`RailsApi/confirm_route/convert_lat_long/${location}`)
   .then(response => response.json())
-  .then(addressInfo => addressInfo.features[0].geometry.coordinates)
+  .then(addressInfo => addressInfo.results[0].geometry.location)
+}
+
+function _convertStartLatLong(location) {
+  console.log(location)
+  return (dispatch) => {
+    dispatch({type: 'CONVERTING_START_LAT_LONG'})
+    return _getLatLong(location).then(({ lat, lng }) => dispatch({type: 'RETRIEVE_START_LAT_LONG', startLat: lat, startLng: lng}))
+  }
+}
+
+function _convertDestinationLatLong(location) {
+  console.log(location)
+  return (dispatch) => {
+    dispatch({type: 'CONVERTING_DESTINATION_LAT_LONG'})
+    return _getLatLong(location).then(({ lat, lng })=> dispatch({type: 'RETRIEVE_DESTINATION_LAT_LONG', destinationLat: lat, destinationLng: lng }))
+  }
 }
 
 export function fetchStartingLocation(input) {
   console.log(input)
     return (dispatch) => {
       dispatch({ type: 'FETCHING_SUGGESTED_START_LOCATIONS' });
-      _fetchLocation(input).then(suggestedStartingLocations => dispatch({ type: 'DISPLAY_START_LOCATIONS', suggestedStartingLocations }));
+      _fetchDropdownLocations(input).then(suggestedStartingLocations => dispatch({ type: 'DISPLAY_START_LOCATIONS', suggestedStartingLocations }));
     };
   }
 
@@ -22,31 +38,24 @@ export function fetchStartingLocation(input) {
     console.log(input)
       return (dispatch) => {
         dispatch({ type: 'FETCHING_SUGGESTED_DESTINATIONS' });
-        _fetchLocation(input).then(suggestedDestinations => dispatch({ type: 'DISPLAY_DESTINATIONS', suggestedDestinations }));
+        _fetchDropdownLocations(input).then(suggestedDestinations => dispatch({ type: 'DISPLAY_DESTINATIONS', suggestedDestinations }));
       };
     }
 
-  export function convertStartLatLong(location) {
-    console.log(location)
-    return (dispatch) => {
-      dispatch({type: 'CONVERTING_START_LAT_LONG'})
-      return _getLatLong(location).then(coordinates => dispatch({type: 'RETRIEVE_START_LAT_LONG', coordinates: coordinates}))
-    }
-  }
-
-  export function convertDestinationLatLong(location) {
-    console.log(location)
-    return (dispatch) => {
-      dispatch({type: 'CONVERTING_DESTINATION_LAT_LONG'})
-      return _getLatLong(location).then(coordinates => dispatch({type: 'RETRIEVE_DESTINATION_LAT_LONG', coordinates: coordinates}))
-    }
-  }
-
   export function convertLatLong(startLocation, destinationLocation){
     return async (dispatch) => {
-      await dispatch(convertStartLatLong(startLocation))
-      await dispatch(convertDestinationLatLong(destinationLocation))
+      await dispatch(_convertStartLatLong(startLocation))
+      await dispatch(_convertDestinationLatLong(destinationLocation))
     }
+  }
+
+  export function fetchUberEstimate(startLat, startLng, destinationLat, destinationLng){
+    return (dispatch) => {
+      dispatch({ type: 'FETCHING_UBER_ESTIMATE' });
+      fetch(`/RailsApi/uber_lyft/?startLat=${startLat}&startLng=${startLng}&destinationLat=${destinationLat}&destinationLng=${destinationLng}`)
+      .then(response => response.json())
+      .then(data => console.log(data));
+    };
   }
 
   export function getMapboxKey(){
