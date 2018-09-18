@@ -52,7 +52,7 @@ export function fetchStartingLocation(input) {
   export function fetchUberEstimate(startLat, startLng, destinationLat, destinationLng){
     return (dispatch) => {
       dispatch({ type: 'FETCHING_UBER_ESTIMATE' });
-      fetch(`/RailsApi/uber_lyft/?startLat=${startLat}&startLng=${startLng}&destinationLat=${destinationLat}&destinationLng=${destinationLng}`)
+      fetch(`/RailsApi/uber_lyft?startLat=${startLat}&startLng=${startLng}&destinationLat=${destinationLat}&destinationLng=${destinationLng}`)
       .then(response => response.json())
       .then(data => console.log(data));
     };
