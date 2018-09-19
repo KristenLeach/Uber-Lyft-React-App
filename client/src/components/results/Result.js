@@ -12,7 +12,7 @@ class Result extends Component {
 
     render(){
         return(
-            <React.Fragment>
+            <div style={{padding: 20}}>
                 <h3>{this.props.header}</h3>
                 <Table collapsing celled selectable>
                 <Table.Header>
@@ -27,7 +27,7 @@ class Result extends Component {
                 </Table.Body>
                 </Table>
                 <Button buttonTitle={this.props.buttonTitle}/>
-            </React.Fragment>
+            </div>
         )
     }
 }

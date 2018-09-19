@@ -13,8 +13,8 @@ export default function rootReducer(state = {
     destinationLng: '', 
     isFetchingUberEstimate: false,
     isFetchingLyftEstimate: false,
-    uberEstimates: [{type: "UberX", costEstimate: '$10-12'}, {type: "UberX", costEstimate: '$10-12'}, {type: "UberX", costEstimate: '$10-12'}],
-    lyftEstimates: [{type: "LyftA", costEstimate: '$10-12'}, {type: "LyftA", costEstimate: '$10-12'}, {type: "LyftA", costEstimate: '$10-12'}]
+    uberEstimates: [{type: "UberX", costEstimate: '$10-12'}, {type: "UberX", costEstimate: '$10-12'}, {type: "UberX", costEstimate: '$10-12'}, {type: "UberX", costEstimate: '$10-12'}, {type: "UberX", costEstimate: '$10-12'}, {type: "UberX", costEstimate: '$10-12'}],
+    lyftEstimates: [{type: "LyftA", costEstimate: '$10-12'}, {type: "LyftA", costEstimate: '$10-12'}, {type: "LyftA", costEstimate: '$10-12'}, {type: "LyftA", costEstimate: '$10-12'}, {type: "LyftA", costEstimate: '$10-12'}, {type: "LyftA", costEstimate: '$10-12'}]
   }, action) {
     switch(action.type){
       case 'FETCHING_MAPBOX_KEY':

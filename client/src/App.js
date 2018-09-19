@@ -8,12 +8,6 @@ import Background from './images/Background.jpg'
 import { getMapboxKey } from './actions/fetchLocations'
 import './App.css';
 
-// var sectionStyle = {
-//   width: "100%",
-//   height: "400px",
-//   backgroundImage: `url(${Background})`
-// };
-
 class App extends Component {
 
   componentDidMount(){
@@ -22,7 +16,15 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
+      <div style={{
+        display: "flex",
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        width: "auto",
+        height: "auto",
+        backgroundImage: `url(${Background})`
+         }} className="App">
         <Router>
           <div>
           <Route exact path="/" component={SearchContainer}/>

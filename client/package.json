@@ -8,6 +8,7 @@
     "google-maps-react": "^2.0.2",
     "mapbox-gl": "^0.49.0",
     "react": "^16.5.0",
+    "react-css-grid": "^2.0.0-0",
     "react-dom": "^16.5.0",
     "react-flexview": "^4.0.1",
     "react-google-maps": "^9.4.5",
@@ -22,7 +23,10 @@
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.3.0",
     "semantic-ui-css": "^2.3.3",
-    "semantic-ui-react": "^0.82.3"
+    "semantic-ui-react": "^0.82.3",
+    "simple-flexbox": "^1.2.0",
+    "styled-components": "^3.4.9",
+    "styled-css-grid": "^1.1.0"
   },
   "scripts": {
     "start": "react-scripts start",
