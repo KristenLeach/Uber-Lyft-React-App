@@ -26,6 +26,18 @@ function _convertDestinationLatLong(location) {
   }
 }
 
+function _normalizeUber({ prices }){
+  return prices.map(({ display_name, estimate }) => (
+    {type: display_name, costEstimate: estimate}
+  ))
+}
+
+function _normalizeLyft({ cost_estimates }){
+  return cost_estimates.map(({display_name, estimated_cost_cents_min, estimated_cost_cents_max}) => (
+    {type: display_name, costEstimate: `$${estimated_cost_cents_min / 100} - ${estimated_cost_cents_max / 100}`}
+  ))
+} 
+
 export function fetchStartingLocation(input) {
   console.log(input)
     return (dispatch) => {
@@ -54,7 +66,9 @@ export function fetchStartingLocation(input) {
       dispatch({ type: 'FETCHING_UBER_ESTIMATE' });
       fetch(`/RailsApi/uber?startLat=${startLat}&startLng=${startLng}&destinationLat=${destinationLat}&destinationLng=${destinationLng}`)
       .then(response => response.json())
-      .then(data => dispatch({ type: 'ADD_UBER_ESTIMATES_TO_STATE', estimates: data.prices }))
+      .then(data => _normalizeUber(data))
+      .then(estimates => estimates.reverse().slice(1))
+      .then(estimates => dispatch({ type: 'ADD_UBER_ESTIMATES_TO_STATE', estimates: estimates }))
     };
   }
 
@@ -63,7 +77,8 @@ export function fetchStartingLocation(input) {
       dispatch({ type: 'FETCHING_LYFT_ESTIMATE' });
       fetch(`/RailsApi/lyft?startLat=${startLat}&startLng=${startLng}&destinationLat=${destinationLat}&destinationLng=${destinationLng}`)
       .then(response => response.json())
-      .then(data => dispatch({ type: 'ADD_LYFT_ESTIMATES_TO_STATE', estimates: data.cost_estimates }))
+      .then(data => _normalizeLyft(data))
+      .then(estimates => dispatch({ type: 'ADD_LYFT_ESTIMATES_TO_STATE', estimates: estimates }))
     };
   }
 
@@ -75,3 +90,6 @@ export function fetchStartingLocation(input) {
       .then(key => dispatch({ type: 'ADD_MAPBOX_KEY_TO_STATE', key }));
     };
   }
+
+ 
+

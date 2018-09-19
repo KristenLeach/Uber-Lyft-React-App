@@ -1,7 +1,7 @@
 import React from 'react'
 
 const CardLabel = (props) => {
-    return <h3>{props.cardLabel}</h3>
+    return <h1>{props.cardLabel}</h1>
 }
 
 export default CardLabel
