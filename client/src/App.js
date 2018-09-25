@@ -7,6 +7,7 @@ import SearchContainer from './containers/SearchContainer'
 import Background from './images/Background.jpg'
 import { getMapboxKey } from './actions/fetchLocations'
 import './App.css';
+import PageTitle from './components/PageTitle';
 
 class App extends Component {
 
@@ -21,11 +22,11 @@ class App extends Component {
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
-        width: "auto",
-        height: "auto",
+        width: "100vw",
+        height: "100vh",
         backgroundImage: `url(${Background})`
          }} className="App">
-        <Router>
+          <Router>
           <div>
           <Route exact path="/" component={SearchContainer}/>
           <Route exact path="/confirm_route" component={ConfirmRouteContainer}/>

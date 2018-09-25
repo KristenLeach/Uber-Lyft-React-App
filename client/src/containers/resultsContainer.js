@@ -8,6 +8,7 @@ import { connect } from 'react-redux'
 
 class ResultsContainer extends Component{
 
+
     render(){
         const cardStyle = {
             display: 'flex',

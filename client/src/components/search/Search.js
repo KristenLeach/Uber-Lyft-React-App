@@ -72,7 +72,7 @@ class Search extends Component{
                     onChange={this.handleChangeStart} 
                     onSubmit={this.handleStartSearch}
                     handleUpdateAddress={this.handleUpdateStartAddress}
-                    // value={this.state.startingLocation}
+                    loading={this.props.isFetchingStartingLocation}
                     />
                 <br/> 
                 <br/>
@@ -80,7 +80,9 @@ class Search extends Component{
                     suggestedLocations={this.props.suggestedDestinations}
                     onChange={this.handleChangeDestination} 
                     onSubmit={this.handleDestinationSearch}
-                    handleUpdateAddress={this.handleUpdateDestinationAddress}/> 
+                    handleUpdateAddress={this.handleUpdateDestinationAddress}
+                    loading={this.props.isFetchingDestination}/> 
+                    
                 <br/>
                 <br/> 
                 <Button buttonTitle="Submit" onClick={this.handleFormSubmit}/>
