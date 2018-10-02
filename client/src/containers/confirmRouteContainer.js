@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import ConfirmRoute from '../components/confirmRoute/ConfirmRoute'
 import CardLabel from '../components/CardLabel'
 import Card from '../components/Card'
-import * as searchActions from '../actions/fetchLocations'
+import * as confirmRouteActions from '../actions/confirmRouteActions'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
@@ -25,7 +25,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = (dispatch) => {
-    return {...bindActionCreators(searchActions, dispatch)}
+    return {...bindActionCreators(confirmRouteActions, dispatch)}
 }
 
 export default connect(mapStateToProps, mapDispatchToProps, (stateProps, dispatchProps, ownProps) => {

@@ -5,7 +5,7 @@ import ConfirmRouteContainer from './containers/ConfirmRouteContainer'
 import ResultsContainer from './containers/ResultsContainer'
 import SearchContainer from './containers/SearchContainer'
 import Background from './images/Background.jpg'
-import { getMapboxKey } from './actions/fetchLocations'
+import { getMapboxKey } from './actions/mapboxActions'
 import './App.css';
 
 class App extends Component {

@@ -6,7 +6,7 @@ class Results extends Component{
 
     componentDidMount(){
         if(this.props.isFetchingUberEstimate){
-            return <Loader type="line-scale" active />
+            console.log("yes")
         }
     }
 
@@ -15,12 +15,6 @@ class Results extends Component{
     }
 
      render(){
-    //     const loaderStyle = .loader-hidden {
-    //         display: none;
-    //       }
-    //       .loader-active {
-    //         display: block;
-    //       }
         
         return(
             <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
