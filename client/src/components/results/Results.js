@@ -10,10 +10,6 @@ class Results extends Component{
         }
     }
 
-    componentDidUpdate(){
-        return <Loader type="line-scale" hidden />
-    }
-
      render(){
         
         return(
